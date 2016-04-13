@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/zhengweikeng/spider#readme",
   "dependencies": {
-    "cheerio": "^0.20.0"
+    "cheerio": "^0.20.0",
+    "mongoose": "^4.4.12",
+    "superagent": "^1.8.3"
   }
 }
