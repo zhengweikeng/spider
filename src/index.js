@@ -1,1 +1,2 @@
-var http =require('http')
+const mongoConnection = require('./utils/mongo')
+mongoConnection()
