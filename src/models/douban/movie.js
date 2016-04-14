@@ -12,6 +12,24 @@ const movieSchema = new Schema({
   'actors': String,
   'category': String,
   'votecount': String,
+  'source': String,
+  'image': String
 })
 
-module.exports = mongoose.model('Movie', movieSchema)
+exports.Movie = mongoose.model('movie', movieSchema)
+
+exports.doubanMoive = (attribs) => {
+  return {
+    title: attribs['data-title'],
+    score: attribs['data-score'],
+    star: attribs['data-star'],
+    release: attribs['data-release'],
+    duration: attribs['data-duration'],
+    region: attribs['data-region'],
+    director: attribs['data-director'],
+    actors: attribs['data-actors'],
+    category: attribs['data-category'],
+    votecount: attribs['data-votecount'],
+    source: 'douban'
+  }
+}

@@ -1,37 +1,30 @@
-const request = require('superagent')
 const cheerio = require('cheerio')
-const urlServer = require('../../config/url-server')
+const movieModel = require('../../models/douban/movie')
+const DoubanMovie = require('./douban')
+const TaobaoMovie = require('./taobao')
 
-const fetchNowPalying = () => {
-  return new Promise((resolve, reject) => {
-    request
-    .get(urlServer.douban.movie.nowPlaying)
-    .end((err, res) => {
-      if (err) {
-        return reject(err)
-      }  
-      return resolve(res)
-    })
-  })
-}
+const saveMovie = (movies) => movieModel.Movie.create(movies)
 
-const parseHtml = (html) => {
-  const $ = cheerio.load(html)
-  const ul = $('#nowplaying .lists')
-  // $(ul).children().map((li) => {
-    
+module.exports = () => {
+  // new DoubanMovie().nowPlaying()
+  // .then((movies) => {
+  //   return saveMovie(movies)
   // })
-  console.log($(ul).children()[0])
+  // .then((res) => {
+  //   console.log(res)
+  // })
+  // .catch((err) => {
+  //   console.log(err)
+  // })
+  
+  new TaobaoMovie().nowPlaying()
 }
-
-
-var http = require('http')
-
 
 const test = () => {
   const fs = require('fs')
   fs.readFile('./mockdata.html', (err, data) => {
-    parseHtml(data)    
+    const datas = parseDoubanHtml(data)
+    saveMovie(datas)    
   })    
 }
-test()
+// test()
