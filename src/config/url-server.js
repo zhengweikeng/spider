@@ -8,5 +8,10 @@ module.exports = {
     movie: {
       nowPlaying: 'https://dianying.taobao.com/showList.htm'
     }
+  },
+  gewala: {
+    movie: {
+      nowPlaying: 'http://www.gewara.com/movie/searchMovie.xhtml'
+    }
   }
 }
