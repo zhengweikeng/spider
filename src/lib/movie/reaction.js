@@ -11,11 +11,14 @@ class Reaction {
     log = debug(`movie:${source}`)
   }
   
-  fetchNowPalying() {
-    log(`fetching ${this.source} nowPlaying movie from: ${this.nowPlayingUrl}`)
+  fetchNowPalying(url) {
+    if (!url) {
+      url = this.nowPlayingUrl
+    }
+    log(`fetching ${this.source} nowPlaying movie from: ${url}`)
     return new Promise((resolve, reject) => {
       request
-      .get(this.nowPlayingUrl)
+      .get(url)
       .end((err, res) => {
         log(`fetching ${this.source} nowPlaying movie finish`)
         if (err) {
@@ -27,7 +30,7 @@ class Reaction {
   }
   
   parseNowPlayingHtml(html) {
-    log('parseing ${this.source} nowPlaying html...')
+    log(`parseing ${this.source} nowPlaying html...`)
     return cheerio.load(html)
   }
   

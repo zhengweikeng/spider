@@ -3,15 +3,18 @@ const debug = require('debug')('movie')
 const movie = require('./movie')
 const DoubanMovie = require('./douban')
 const TaobaoMovie = require('./taobao')
+// const GewalaMovie = require('./gewala')
 const urlServer = require('../../config/url-server')
 
 module.exports = () => {
   const doubanNowplayingUrl = urlServer.douban.movie.nowPlaying
   const taobaoNowplayingUrl = urlServer.taobao.movie.nowPlaying
+  // const gewalaNowplayingUrl = urlServer.gewala.movie.nowPlaying
   return movie.removeMovies({category: 'nowplaying'})
   .then((res) => {
     const douban = new DoubanMovie(doubanNowplayingUrl).nowPlaying()
     const taobao = new TaobaoMovie(taobaoNowplayingUrl).nowPlaying()
+    // const gewala = new GewalaMovie(gewalaNowplayingUrl).nowPlaying()
     return Promise.all([douban, taobao])
   })
   .then((movies) => {
