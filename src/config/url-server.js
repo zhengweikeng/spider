@@ -13,5 +13,10 @@ module.exports = {
     movie: {
       nowPlaying: 'http://www.gewara.com/movie/searchMovie.xhtml'
     }
+  },
+  meituan: {
+    movie: {
+      nowPlaying: 'http://www.meituan.com/dianying/zuixindianying'
+    }
   }
 }
