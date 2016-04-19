@@ -3,22 +3,33 @@ const debug = require('debug')('movie')
 const movie = require('./movie')
 const DoubanMovie = require('./douban')
 const TaobaoMovie = require('./taobao')
-// const GewalaMovie = require('./gewala')
+const MeituanMovie = require('./meituan')
 const urlServer = require('../../config/url-server')
 
 module.exports = () => {
   const doubanNowplayingUrl = urlServer.douban.movie.nowPlaying
   const taobaoNowplayingUrl = urlServer.taobao.movie.nowPlaying
-  // const gewalaNowplayingUrl = urlServer.gewala.movie.nowPlaying
+  const meituanNowplayingUrl = urlServer.meituan.movie.nowPlaying
   return movie.removeMovies({category: 'nowplaying'})
   .then((res) => {
     const douban = new DoubanMovie(doubanNowplayingUrl).nowPlaying()
     const taobao = new TaobaoMovie(taobaoNowplayingUrl).nowPlaying()
-    // const gewala = new GewalaMovie(gewalaNowplayingUrl).nowPlaying()
-    return Promise.all([douban, taobao])
+    const meituan = new MeituanMovie(meituanNowplayingUrl).nowPlaying()
+    return Promise.all([
+      douban, 
+      taobao, 
+      meituan
+    ])
   })
   .then((movies) => {
-    movies = movies[0].concat(movies[1])
+    const initArr = movies[0] ? movies[0] : []
+    movies.shift()
+    movies = movies.reduce((prevList , currList) => {
+      if (currList && currList.length > 0) {
+        return prevList.concat(currList)
+      }
+      return prevList
+    }, initArr)
     return movie.saveMovies(movies)
   })
   .then((res) => console.log(res))
