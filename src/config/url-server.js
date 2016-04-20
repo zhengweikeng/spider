@@ -2,7 +2,8 @@ module.exports = {
   douban: {
     movie: {
       nowPlaying: 'https://movie.douban.com/nowplaying',
-      tags: 'https://movie.douban.com/j/search_tags?type=movie'
+      tags: 'https://movie.douban.com/j/search_tags?type=movie',
+      movies: 'https://movie.douban.com/j/search_subjects?type=movie&&sort=recommend'
     }
   },
   taobao: {

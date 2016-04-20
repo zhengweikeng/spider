@@ -9,7 +9,7 @@ const typesArr = types.split(',')
 const hubs = typesArr.map((type) => {
   switch (type) {
     case 'movie':
-      return collection.crawlTags()
+      return collection.crawlMovies()
 
     default:
       return Promise.resolve('finish')
@@ -19,5 +19,8 @@ const hubs = typesArr.map((type) => {
 Promise.all(hubs)
 .then(() => {
   console.log('finish all')
-  process.exit(0)
 })
+.catch((err) => {
+  console.log(err)
+})
+.then(() => process.exit(0))

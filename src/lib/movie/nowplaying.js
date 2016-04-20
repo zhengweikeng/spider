@@ -32,5 +32,4 @@ module.exports = () => {
     return movie.saveMovies(movies)
   })
   .then((res) => console.log(res))
-  .catch((err) => debug(err))
 }

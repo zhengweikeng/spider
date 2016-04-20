@@ -35,6 +35,14 @@ class DoubanMovie extends Reaction{
     return request.get(tagUrl)
     .then((res) => res.body.tags)
   }
+  
+  getMovieByTag(tag) {
+    const queryUrl = urlServer.douban.movie.movies
+    const page_limit = 3
+    const page_start = 0
+    return request.get(queryUrl, {tag, page_limit, page_start})
+    .then((res) => res.body.subjects)
+  }
 }
 
 module.exports = DoubanMovie
