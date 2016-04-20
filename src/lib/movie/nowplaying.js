@@ -1,9 +1,8 @@
-const cheerio = require('cheerio')
 const debug = require('debug')('movie')
-const movie = require('./movie')
-const DoubanMovie = require('./douban')
-const TaobaoMovie = require('./taobao')
-const MeituanMovie = require('./meituan')
+const movie = require('./nowplaying-movie')
+const DoubanMovie = require('./source/douban')
+const TaobaoMovie = require('./source/taobao')
+const MeituanMovie = require('./source/meituan')
 const urlServer = require('../../config/url-server')
 
 module.exports = () => {

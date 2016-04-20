@@ -12,6 +12,7 @@ module.exports = () => {
   mongoose.connect(url, options, (err) =>{
     if (err) {
       const message = `mongodb connect to ${url} error`
+      console.log(message)
       process.exit(1)
     }
     debug(`mongodb connect success, url: ${url}`)

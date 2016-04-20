@@ -11,7 +11,7 @@ class Meituan extends Reaction {
     const movies = []
     const movieCells = $('#content .movies-container .movie-cell')
     movieCells.each((_, cell)=> {
-      const info = {source: 'meituan', category: 'nowplaying'}
+      const info = {category: 'nowplaying'}
       const $$ = cheerio.load($(cell).html())
       info.image = $$('.movie-cell__cover img').attr('src')
       info.title = $$('.movie-cell__title a').text()

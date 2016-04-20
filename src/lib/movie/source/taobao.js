@@ -19,7 +19,7 @@ class TaobaoMovie extends Reaction {
     let $$$ = null
     let elemHtml = null
     movieCardList.each((_, movieCard) => {
-      const info = {source: 'taobao', category: 'nowplaying'}
+      const info = {category: 'nowplaying'}
       movieCard.children.forEach((elem) =>{
         if (elem.name === 'div') {
           const elemHtml = $$(elem).html()

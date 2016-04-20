@@ -1,7 +1,7 @@
 "use strict"
 const cheerio = require('cheerio')
 const debug = require('debug')
-const request = require('superagent')
+const request = require('../../../utils/request')
 var log = null
 
 class Reaction {
@@ -16,17 +16,7 @@ class Reaction {
       url = this.nowPlayingUrl
     }
     log(`fetching ${this.source} nowPlaying movie from: ${url}`)
-    return new Promise((resolve, reject) => {
-      request
-      .get(url)
-      .end((err, res) => {
-        log(`fetching ${this.source} nowPlaying movie finish`)
-        if (err) {
-          return reject(err)
-        }  
-        return resolve(res.text.toString())
-      })
-    })
+    return request.get(url).then((res) => res.text.toString(), (err) => reject(err))
   }
   
   parseNowPlayingHtml(html) {
