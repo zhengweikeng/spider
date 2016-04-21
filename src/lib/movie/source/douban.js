@@ -38,10 +38,24 @@ class DoubanMovie extends Reaction{
   
   getMovieByTag(tag) {
     const queryUrl = urlServer.douban.movie.movies
-    const page_limit = 3
+    const page_limit = 100
     const page_start = 0
     return request.get(queryUrl, {tag, page_limit, page_start})
     .then((res) => res.body.subjects)
+  }
+  
+  getMovieDetail(mId) {
+    const movieDetail = {mId}
+    const queryUrl = `${urlServer.douban.movie.detail}/${mId}`
+    request.get(queryUrl)
+    .then((res) => {
+      const html = res.text.toString()
+      const $ = cheerio.load(html)
+      
+      movieDetail.title = $('#content h1 span').first().text()
+      movieDetail.release = $('#content h1 span.year').text()
+      movieDetail.score = $('#interest_sectl .rating_self strong.rating_num').text()
+    })
   }
 }
 
