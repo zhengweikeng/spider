@@ -10,6 +10,7 @@ const hubs = typesArr.map((type) => {
   switch (type) {
     case 'movie':
       return collection.crawlMovies()
+      // return collection.crawlTags()
 
     default:
       return Promise.resolve('finish')

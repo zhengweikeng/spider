@@ -1,5 +1,6 @@
 const DoubanMovie = require('./source/douban')
 const movie = require('./collection-movie')
+const debug = require('debug')('movie')
 
 exports.crawlTags = () => {
   const douban = new DoubanMovie()
@@ -14,9 +15,7 @@ exports.crawlTags = () => {
 exports.crawlMovies = () => {
   const douban = new DoubanMovie()
   return movie.findTags({})
-  .then((tags) => {
-    return tags.map((tag) => douban.getMovieByTag(tag))
-  })
+  .then((tags) => tags.map((tag) => douban.getMovieByTag(tag.name)))
   .then((promises) => Promise.all(promises))
   .then((movies) => {
     movies = movies.reduce((prevList, currList) => {
@@ -24,7 +23,7 @@ exports.crawlMovies = () => {
         return prevList.concat(currList)
       }
       return prevList
-    })
+    }, [])
     
     movies = movies.map((mv) => {
       return {
@@ -35,6 +34,9 @@ exports.crawlMovies = () => {
       }
     })
     
-    return movie.saveMovies(movies)
+    return movie.batchUpdateOrCreate(movies).then((res) => {
+      debug(res)
+      return res     
+    })
   })
 }

@@ -20,6 +20,7 @@
   "dependencies": {
     "cheerio": "^0.20.0",
     "debug": "^2.2.0",
+    "lodash": "^4.11.1",
     "mongoose": "^4.4.12",
     "superagent": "^1.8.3"
   }
