@@ -12,7 +12,7 @@ const MovieDescSchema = new Schema({
   director: String,
   actors: String,
   category: String,
-  release: Integer
+  release: Date
 })
 
 module.exports = mongoose.model('MovieDesc', MovieDescSchema)

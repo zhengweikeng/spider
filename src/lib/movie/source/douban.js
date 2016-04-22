@@ -47,14 +47,24 @@ class DoubanMovie extends Reaction{
   getMovieDetail(mId) {
     const movieDetail = {mId}
     const queryUrl = `${urlServer.douban.movie.detail}/${mId}`
-    request.get(queryUrl)
+    return request.get(queryUrl)
     .then((res) => {
       const html = res.text.toString()
       const $ = cheerio.load(html)
       
-      movieDetail.title = $('#content h1 span').first().text()
-      movieDetail.release = $('#content h1 span.year').text()
-      movieDetail.score = $('#interest_sectl .rating_self strong.rating_num').text()
+      var str = $('#content #info').text()
+      var start = $('#content #info').text().indexOf('地区:') + 3
+      var end = $('#content #info').text().indexOf('语言')
+      movieDetail.director = str.substring(start, end).trim() 
+      console.log(movieDetail.director)
+      
+      // movieDetail.title = $('#content h1 span').first().text()
+      // movieDetail.score = $('#interest_sectl .rating_self strong.rating_num').text()
+      // movieDetail.director = $('#content #subject span .attrs a').first().text()
+      // movieDetail.actors = []
+      // $('#content .actor .attrs span a').each((link) => movieDetail.actors.push($(link).text()))
+      // movieDetail.category = $('#content span[property=v:genre]').text()
+      // movieDetail.release = $('#content span[property=v:initialReleaseDate]').text().subString(0, 10)
     })
   }
 }
