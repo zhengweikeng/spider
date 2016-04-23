@@ -5,14 +5,13 @@ const MovieDescSchema = new Schema({
   mId: String,
   title: String,
   score: String,
+  region: String,
+  actors: Array,
+  director: String,
+  category: String,
+  release: Date,
   evaluate_no: Number,
   starts: Array,
-  duration: String,
-  region: String,
-  director: String,
-  actors: String,
-  category: String,
-  release: Date
 })
 
-module.exports = mongoose.model('MovieDesc', MovieDescSchema)
+module.exports = mongoose.model('MovieDetail', MovieDescSchema)

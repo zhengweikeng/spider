@@ -1,5 +1,6 @@
 const Tags = require('../../models/movie/tags')
 const Movie = require('../../models/movie/movie')
+const MovieDetail = require('../../models/movie/movie-detail')
 
 exports.saveTags = (tags) => Tags.create(tags)
 
@@ -17,3 +18,7 @@ exports.batchUpdateOrCreate = (movies) => {
   })
   return Promise.all(updatePromises)
 }
+
+exports.saveManyMovieDetais = (details) => MovieDetail.insertMany(details)
+
+exports.saveMovieDetais = (details) => MovieDetail.save(details)

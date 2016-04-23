@@ -9,9 +9,10 @@ module.exports = app = () => {
   const hubs = typesArr.map((type) => {
     switch (type) {
       case 'movie':
-        return collection.crawlMoviesDetail('26585014')
+        return nowplaying()
+        // return collection.crawlMoviesDetail('26585014')
         // return collection.crawlTags()
-
+        // return collection.crawlMovies()
       default:
         return Promise.resolve('finish')
     }

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/zhengweikeng/spider#readme",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "cheerio": "^0.20.0",
     "debug": "^2.2.0",
     "lodash": "^4.11.1",
